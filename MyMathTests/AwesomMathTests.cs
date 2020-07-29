@@ -1,6 +1,8 @@
 using MyMath;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using Xunit;
 
 namespace MyMathTests
@@ -77,7 +79,21 @@ namespace MyMathTests
             Assert.Equal(expectedDivisor, actualDivisor);
         }
 
+        [Fact(DisplayName = "Given the number int.Max -1 should return all divisors within 1 second")]
+        public void GivenBigNumberShouldRunWithinOneSecond()
+        {
+            //arrange
+            int number = int.MaxValue - 1;
+            var timer = new Stopwatch();
 
+            //act
+            timer.Start();
+            var actualDivisor = AwesomeMath.GetDivisor(number);
+            timer.Stop();
+
+            //assert
+            Assert.True(timer.ElapsedMilliseconds <=100);
+        }
 
 
     }
