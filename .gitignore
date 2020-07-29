@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/MyMath/.vs/MyMath
+/MyMath/bin/
+/MyMath/obj
+/MyMathTests/bin/
+/MyMathTests/obj
