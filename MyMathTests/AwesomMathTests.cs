@@ -79,7 +79,7 @@ namespace MyMathTests
             Assert.Equal(expectedDivisor, actualDivisor);
         }
 
-        [Fact(DisplayName = "Given the number int.Max -1 should return all divisors within 1 second")]
+        [Fact(DisplayName = "Given the number int.Max -1 should return all divisors within 10 miliseconds")]
         public void GivenBigNumberShouldRunWithinOneSecond()
         {
             //arrange
@@ -92,7 +92,7 @@ namespace MyMathTests
             timer.Stop();
 
             //assert
-            Assert.True(timer.ElapsedMilliseconds <=100);
+            Assert.True(timer.ElapsedMilliseconds <=10);
         }
 
 
