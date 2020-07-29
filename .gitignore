@@ -3,3 +3,7 @@
 ################################################################################
 
 /MyMath/.vs/MyMath
+/MyMath/bin/
+/MyMath/obj
+/MyMathTests/bin/
+/MyMathTests/obj
