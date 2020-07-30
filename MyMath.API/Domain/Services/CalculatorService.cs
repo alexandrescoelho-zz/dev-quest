@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MyMath.API.Domain
+namespace MyMath.API.Domain.Services
 {
     public class CalculatorService : ICalculatorService
     {

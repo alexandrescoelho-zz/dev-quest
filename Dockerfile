@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 WORKDIR /app
 
 # copy csproj and restore as distinct layers
-COPY *.sln .
+COPY *.sln ./
 COPY MyMath/*.* ./MyMath/
 COPY MyMathTests/*.* ./MyMathTests/
 COPY MyMath.API/*.* ./MyMath.API/
