@@ -7,3 +7,5 @@
 /MyMath/obj
 /MyMathTests/bin/
 /MyMathTests/obj
+/MyMath.API/bin/Debug/netcoreapp3.1
+/MyMath.API/obj

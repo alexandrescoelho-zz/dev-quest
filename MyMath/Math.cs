@@ -31,7 +31,7 @@ namespace MyMath
 
         public static bool IsPrime(int number) {
 
-            if (number < 3)
+            if (number <= 3)
                 return (number > 1);
             else if (number % 2 == 0 || number % 3 == 0)
                 return false;
