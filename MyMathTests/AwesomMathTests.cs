@@ -13,7 +13,7 @@ namespace MyMathTests
 
         #region Divisor Tests
 
-        [Fact(DisplayName = "Given the number 40 should return a list containing 8 divisor")]
+        [Fact(DisplayName = "[Divisor] Given the number 40 should return a list containing 8 divisor")]
         public void GivenSmallNumberShouldReturnListWithNumbers()
         {
             //arrange
@@ -26,7 +26,7 @@ namespace MyMathTests
             Assert.Equal(8, actualDivisor.Count());
         }
 
-        [Fact(DisplayName = "Given the number 40 should return a list and match with the specified 8 divisor")]
+        [Fact(DisplayName = "[Divisor] Given the number 40 should return a list and match with the specified 8 divisor")]
         public void GivenSmallNumerShouldReturnListAndMatchWithSpecifiedNumbers()
         {
             //arrange
@@ -40,7 +40,7 @@ namespace MyMathTests
             Assert.Equal(expectedDivisor, actualDivisor);
         }
 
-        [Fact(DisplayName = "Given the number int.Max -1 should return a list containing 192 divisor")]
+        [Fact(DisplayName = "[Divisor] Given the number int.Max -1 should return a list containing 192 divisor")]
         public void GivenBigNumberShouldReturnListWithNumbers()
         {
             //arrange
@@ -53,7 +53,7 @@ namespace MyMathTests
             Assert.Equal(192, actualDivisor.Count());
         }
 
-        [Fact(DisplayName = "Given the number int.Max -1 should return a list and match with the specified 192 divisor")]
+        [Fact(DisplayName = "[Divisor] Given the number int.Max -1 should return a list and match with the specified 192 divisor")]
         public void GivenBigNumberShouldReturnListAndMatchWithSpecifiedNumbers()
         {
             //arrange
@@ -82,7 +82,7 @@ namespace MyMathTests
             Assert.Equal(expectedDivisor, actualDivisor);
         }
 
-        [Fact(DisplayName = "Given the number int.Max -1 should return all divisors within 10 miliseconds")]
+        [Fact(DisplayName = "[Divisor] Given the number int.Max -1 should return all divisors within 10 miliseconds")]
         public void GivenBigNumberShouldRunWithinOneSecond()
         {
             //arrange
@@ -98,14 +98,14 @@ namespace MyMathTests
             Assert.True(timer.ElapsedMilliseconds <= 10);
         }
 
-        [Fact(DisplayName = "Given a negative number should throw Argument Out Of Range Exception")]
+        [Fact(DisplayName = "[Divisor] Given a negative number should throw Argument Out Of Range Exception")]
         public void GivenSmallNegativeNumberShouldTrowAnException()
         {
             //arrange
             int number = -40;
 
             //act
-            var exception = Assert.ThrowsAny<Exception>(()=>AwesomeMath.GetDivisorsFromPositiveNumber(number));
+            var exception = Assert.ThrowsAny<Exception>(() => AwesomeMath.GetDivisorsFromPositiveNumber(number));
 
             //assert
             Assert.IsType<ArgumentOutOfRangeException>(exception);
@@ -115,17 +115,33 @@ namespace MyMathTests
 
         #region IsPrime Tests
 
-        [Fact(DisplayName = "Given a know prime number should return true ")]
-        public void CheckIfKnowPrimeIsPrime() {
+        [Fact(DisplayName = "[Prime] Given a known prime number should return true ")]
+        public void CheckIfKnowPrimeIsPrime()
+        {
 
             //arrange
             var number = 43;
 
             //act
-            var isPrime = AwesomeMath.IsPrime(43);
+            var isPrime = AwesomeMath.IsPrime(number);
 
             //assert
             Assert.True(isPrime);
+        }
+
+        [Fact(DisplayName = "[Prime] Given a list of numbers should return only primes ")]
+        public void GetAllPrimeNumbersFromList()
+        {
+            //arrange
+            var listToVerify = new List<int> { 1, 2, 4, 5, 8, 10, 20, 40 };
+
+            var expectedNumbers = new int[] { 2, 5 };
+
+            //act
+            var primeNumbers = listToVerify.Where(AwesomeMath.IsPrime).ToArray();
+
+            //assert
+            Assert.Equal(expectedNumbers, primeNumbers);
         }
 
         #endregion
