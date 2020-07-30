@@ -1,4 +1,5 @@
 using MyMath;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -10,20 +11,22 @@ namespace MyMathTests
     public class AwesomMathTests
     {
 
-        [Fact(DisplayName = "Given the number 40 should return a list containing 8 divisor")]
+        #region Divisor Tests
+
+        [Fact(DisplayName = "[Divisor] Given the number 40 should return a list containing 8 divisor")]
         public void GivenSmallNumberShouldReturnListWithNumbers()
         {
             //arrange
             int number = 40;
 
             //act
-            var actualDivisor = AwesomeMath.GetDivisor(number);
+            var actualDivisor = AwesomeMath.GetDivisorsFromPositiveNumber(number);
 
             //assert
             Assert.Equal(8, actualDivisor.Count());
         }
 
-        [Fact(DisplayName = "Given the number 40 should return a list and match with the specified 8 divisor")]
+        [Fact(DisplayName = "[Divisor] Given the number 40 should return a list and match with the specified 8 divisor")]
         public void GivenSmallNumerShouldReturnListAndMatchWithSpecifiedNumbers()
         {
             //arrange
@@ -31,26 +34,26 @@ namespace MyMathTests
             var expectedDivisor = new List<int> { 1, 2, 4, 5, 8, 10, 20, 40 };
 
             //act
-            var actualDivisor = AwesomeMath.GetDivisor(number);
+            var actualDivisor = AwesomeMath.GetDivisorsFromPositiveNumber(number);
 
             //assert
             Assert.Equal(expectedDivisor, actualDivisor);
         }
 
-        [Fact(DisplayName = "Given the number int.Max -1 should return a list containing 192 divisor")]
+        [Fact(DisplayName = "[Divisor] Given the number int.Max -1 should return a list containing 192 divisor")]
         public void GivenBigNumberShouldReturnListWithNumbers()
         {
             //arrange
-            int number = int.MaxValue-1;
+            int number = int.MaxValue - 1;
 
             //act
-            var actualDivisor = AwesomeMath.GetDivisor(number);
+            var actualDivisor = AwesomeMath.GetDivisorsFromPositiveNumber(number);
 
             //assert
             Assert.Equal(192, actualDivisor.Count());
         }
 
-        [Fact(DisplayName = "Given the number int.Max -1 should return a list and match with the specified 192 divisor")]
+        [Fact(DisplayName = "[Divisor] Given the number int.Max -1 should return a list and match with the specified 192 divisor")]
         public void GivenBigNumberShouldReturnListAndMatchWithSpecifiedNumbers()
         {
             //arrange
@@ -73,13 +76,13 @@ namespace MyMathTests
             97612893, 102261126, 119304647, 153391689, 195225786, 238609294, 306783378, 357913941, 715827882, 1073741823, 2147483646 };
 
             //act
-            var actualDivisor = AwesomeMath.GetDivisor(number);
+            var actualDivisor = AwesomeMath.GetDivisorsFromPositiveNumber(number);
 
             //assert
             Assert.Equal(expectedDivisor, actualDivisor);
         }
 
-        [Fact(DisplayName = "Given the number int.Max -1 should return all divisors within 10 miliseconds")]
+        [Fact(DisplayName = "[Divisor] Given the number int.Max -1 should return all divisors within 10 miliseconds")]
         public void GivenBigNumberShouldRunWithinOneSecond()
         {
             //arrange
@@ -88,13 +91,59 @@ namespace MyMathTests
 
             //act
             timer.Start();
-            var actualDivisor = AwesomeMath.GetDivisor(number);
+            var actualDivisor = AwesomeMath.GetDivisorsFromPositiveNumber(number);
             timer.Stop();
 
             //assert
-            Assert.True(timer.ElapsedMilliseconds <=10);
+            Assert.True(timer.ElapsedMilliseconds <= 10);
         }
 
+        [Fact(DisplayName = "[Divisor] Given a negative number should throw Argument Out Of Range Exception")]
+        public void GivenSmallNegativeNumberShouldTrowAnException()
+        {
+            //arrange
+            int number = -40;
 
+            //act
+            var exception = Assert.ThrowsAny<Exception>(() => AwesomeMath.GetDivisorsFromPositiveNumber(number));
+
+            //assert
+            Assert.IsType<ArgumentOutOfRangeException>(exception);
+        }
+
+        #endregion
+
+        #region IsPrime Tests
+
+        [Fact(DisplayName = "[Prime] Given a known prime number should return true ")]
+        public void CheckIfKnowPrimeIsPrime()
+        {
+
+            //arrange
+            var number = 43;
+
+            //act
+            var isPrime = AwesomeMath.IsPrime(number);
+
+            //assert
+            Assert.True(isPrime);
+        }
+
+        [Fact(DisplayName = "[Prime] Given a list of numbers should return only primes ")]
+        public void GetAllPrimeNumbersFromList()
+        {
+            //arrange
+            var listToVerify = new List<int> { 1, 2, 4, 5, 8, 10, 20, 40 };
+
+            var expectedNumbers = new int[] { 2, 5 };
+
+            //act
+            var primeNumbers = listToVerify.Where(AwesomeMath.IsPrime).ToArray();
+
+            //assert
+            Assert.Equal(expectedNumbers, primeNumbers);
+        }
+
+        #endregion
     }
 }
