@@ -9,13 +9,13 @@ namespace MyMath.API.Domain
 {
     public class CalculatorService : ICalculatorService
     {
-        public DivisorCaluculationDTO GetAllDivisorsAndPrimeNumber(int number)
+        public Task<DivisorCaluculationDTO> GetAllDivisorsAndPrimeNumber(int number)
         {
 
             var divisors = AwesomeMath.GetDivisorsFromPositiveNumber(number);
             var primes = divisors.Where(AwesomeMath.IsPrime);
 
-            return new DivisorCaluculationDTO { Divisors = divisors, Primes = primes };
+            return Task.FromResult(new DivisorCaluculationDTO { Number = number, Divisors = divisors, Primes = primes });
         }
     }
 }

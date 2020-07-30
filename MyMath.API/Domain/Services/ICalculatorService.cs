@@ -8,6 +8,6 @@ namespace MyMath.API.Domain.Services
 {
     public interface ICalculatorService
     {
-        DivisorCaluculationDTO GetAllDivisorsAndPrimeNumber(int number);
+        Task<DivisorCaluculationDTO> GetAllDivisorsAndPrimeNumber(int number);
     }
 }
