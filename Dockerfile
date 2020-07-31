@@ -1,17 +1,28 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
+
 WORKDIR /app
 
+WORKDIR /src
 # copy csproj and restore as distinct layers
 COPY *.sln ./
-COPY MyMath/*.* ./MyMath/
-COPY MyMathTests/*.* ./MyMathTests/
-COPY MyMath.API/*.* ./MyMath.API/
+COPY MyMath/*.csproj ./MyMath/
+COPY MyMathTests/*.csproj ./MyMathTests/
+COPY MyMath.API/*.csproj ./MyMath.API/
+
 RUN dotnet restore
 
-# copy everything else and build app
-RUN dotnet publish -c Release -o publish
+COPY . .
+
+WORKDIR /src/MyMath
+RUN dotnet build -c Release -o /app
+
+WORKDIR /src/MyMath.API
+RUN dotnet build -c Release -o /app
+
+FROM build AS publish
+RUN dotnet publish -c Release -o /app
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS runtime
 WORKDIR /app
-COPY --from=build /app/publish ./
+COPY --from=publish /app .
 ENTRYPOINT ["dotnet", "MyMath.API.dll"]

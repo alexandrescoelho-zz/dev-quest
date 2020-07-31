@@ -22,16 +22,14 @@ Say what the step will be
 
 ```
 docker build -t mymathapi-image -f Dockerfile . 
-docker create --name core-mymathapi mymathapi-image
-docker start core-mymathapi
-
+docker run -it --rm -p 5000:5000 -e ASPNETCORE_URLS=http://0.0.0.0:5000 -d mymathapi-image
 ```
 ## Running
 
 To run the API just open your browser and type  
 
 ```
-https://localhost:5001
+https://localhost:5000/swagger
 ```
 
 ## Authors
