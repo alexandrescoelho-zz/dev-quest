@@ -29,7 +29,7 @@ docker run -it --rm -p 5000:5000 -e ASPNETCORE_URLS=http://0.0.0.0:5000 -d mymat
 To run the API just open your browser and type  
 
 ```
-https://localhost:5000/swagger
+http://localhost:5000/swagger
 ```
 
 ## Authors
